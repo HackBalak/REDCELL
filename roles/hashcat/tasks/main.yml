@@ -1,0 +1,39 @@
+---
+# tasks file for hashcat
+
+
+- name: Install Hashcat dependencies
+  become: true
+  when: ansible_os_family == "Debian"
+  apt:
+    name: "{{ hashcat_packages }}"
+    update_cache: yes
+    state: latest
+
+
+- name: Install Linux headers
+  become: true
+  shell: apt install linux-headers-$(uname -r)
+
+
+- name: Clone repository
+  become: true
+  git:
+    repo: https://github.com/hashcat/hashcat.git
+    dest: "{{ hashcat_git_location }}/hashcat"
+    update: yes
+    recursive: yes
+
+- name: Build Hashcat
+  become: true
+  command: make
+  args:
+    chdir: "{{ hashcat_git_location }}/hashcat"
+
+- name: Install Hashcat
+  become: true
+  command: make install
+  args:
+    chdir: "{{ hashcat_git_location }}/hashcat"
+
+

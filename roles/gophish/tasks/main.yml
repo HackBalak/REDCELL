@@ -1,0 +1,102 @@
+---
+# tasks file for gophish
+
+- name: Ensure ufw is installed on the machine
+  become: yes
+  package:
+    name: ufw
+    state: present
+
+- name: Allow TCP 22 for SSH.
+  ufw:
+    rule: allow
+    port: '22'
+    proto: tcp
+
+- name: Allow TCP 80 for Gophish.
+  ufw:
+    rule: allow
+    port: '80'
+    proto: tcp
+
+- name: Allow TCP 443 for Gophish.
+  ufw:
+    rule: allow
+    port: '443'
+    proto: tcp
+
+- name: Enable ufw.
+  ufw:
+    state: enabled
+    policy: deny
+  when: enable_ufw_firewall
+
+- name: Install specified packages.
+  apt:
+    pkg: "{{ install_packages }}"
+    state: latest
+
+- name: Check if we already downloaded the zip.
+  stat:
+    path: "/home/{{ gophish_user }}/gophish.zip"
+  register: zip
+
+- name: Download latest Gophish .zip file.
+  get_url:
+    url: https://getgophish.com/releases/latest/linux/64
+    dest: "/home/{{ gophish_user }}/gophish.zip"
+    mode: 0755
+    owner: "{{ gophish_user }}"
+    group: "{{ gophish_user }}"
+  when: not zip.stat.exists
+
+- name: Create directory for gophish.
+  file:
+    path: "/home/{{ gophish_user }}/gophish_deploy"
+    state: directory
+    mode: 0755
+    owner: "{{ gophish_user }}"
+    group: "{{ gophish_user }}"
+
+- name: Unzip gophish file.
+  unarchive:
+    src: "/home/{{ gophish_user }}/gophish.zip"
+    dest: "/home/{{ gophish_user }}/gophish_deploy"
+    remote_src: True  # File is on target server and not locally.
+    owner: "{{ gophish_user }}"
+    group: "{{ gophish_user }}"
+  when: not zip.stat.exists
+
+
+- name: Change ownership of Gophish folder and files.
+  file:
+    path: /home/{{ gophish_user }}/gophish_deploy
+    owner: "{{ gophish_user }}"
+    group: "{{ gophish_user }}"
+    recurse: True
+
+- name: Ensure gophish binary is allowed to bind to privileged ports using setcap
+  capabilities:
+    path: /home/{{ gophish_user }}/gophish_deploy/gophish
+    capability: cap_net_bind_service+eip
+    state: present
+
+- name: Copy config.json file.
+  copy:
+    src: files/config.json
+    dest: "/home/{{ gophish_user }}/gophish_deploy/config.json"
+    owner: "{{ gophish_user }}"
+    group: "{{ gophish_user }}"
+    mode: 0644
+
+
+- name: run gophish service 
+  become: true
+  shell: cd /home/{{ gophish_user }}/gophish_deploy ; chmod +x gophish ; sudo ./gophish 2>&1 | tee debug.log
+  async: 1000
+  poll: 0
+  register: gophish_bg_outpout
+
+- name: Only if you run it for the first time 
+  debug:
+    msg: "default login credentials are : username = admin | password = gophish   ; Don't forget to update them !!!!" 

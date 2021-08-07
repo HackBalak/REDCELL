@@ -1,0 +1,13 @@
+---
+# tasks file for covenant
+
+- name: Clone repository if not exist 
+  become: true
+  shell: if [ -d "/home/vagrant/Covenant/Covenant" ]; then echo "repository already exist" ; else git clone --recurse-submodules https://github.com/cobbr/Covenant ; fi
+
+- name: Install and run covenant
+  become: true
+  shell: cd /home/vagrant/Covenant/Covenant ; dotnet run 
+  async: 1000
+  poll: 0
+  register: bg_outpout

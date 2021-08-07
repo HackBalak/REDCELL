@@ -1,0 +1,7 @@
+---
+# vars file for hashcat
+hashcat_git_location: '/opt'
+hashcat_packages:
+  - build-essential
+  - p7zip-full
+  - linux-image-extra-virtual

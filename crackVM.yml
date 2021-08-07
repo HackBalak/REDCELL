@@ -1,0 +1,8 @@
+---
+- name: CrackStation machine Setup
+  hosts: crackVM
+  become: yes
+  
+  roles:
+  - hashcat
+  - common

@@ -1,0 +1,11 @@
+---
+- name: Scan machine Setup
+  hosts: scanVM
+  become: yes
+  
+  roles:
+  - common
+
+    
+
+

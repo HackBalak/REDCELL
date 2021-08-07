@@ -1,0 +1,28 @@
+---
+# tasks file for common
+
+
+- name: Create omar user
+  user:
+    name: omar
+    state: present
+    password: "{{ 'Redcell_101' | password_hash('sha512') }}"
+    update_password: on_create
+    shell: /bin/bash
+- name: Edit SSHD Config
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^PasswordAuthentication '
+    insertafter: '#PasswordAuthentication'
+    line: 'PasswordAuthentication yes'
+  notify: restart_sshd
+
+- name: Add sudo rights for omar
+  copy:
+    dest: /etc/sudoers.d/omar
+    content: "omar ALL=(root) NOPASSWD: ALL"
+    backup: true
+- name: restart_sshd
+  service:
+    name: sshd
+    state: restarted

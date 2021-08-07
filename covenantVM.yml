@@ -1,0 +1,9 @@
+---
+- name: Covenant C2 machine
+  hosts: covenantVM
+  become: yes
+  
+  roles:
+  - dotnet
+  - covenant
+  - common
