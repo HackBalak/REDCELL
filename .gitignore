@@ -1,4 +1,4 @@
-# General
+# To ignore vagrant files
 .vagrant/
 
 # Log files 
