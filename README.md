@@ -12,7 +12,7 @@ This lab is made of six virtual machines that seems necessary for the CKC steps 
 
 - **covenantRedirector** running ubuntu machine with nginx redirector on port 80 .
 
-- **phishingVM** running ubuntu machine with gophish tool installed and running on port 3333 and 80 .
+- **phishingVM** running ubuntu machine with gophish tool installed and running on ports 3333 and 80 .
 
 - **gophishRedirector** running ubuntu machine with nginx redirector on port 80 .
 
