@@ -2,11 +2,19 @@
 
 Redcell is an Infrastructure as Code Lab of red teamers operations , it's built by Vagrant and Ansible , and it can be run locally .
 
-This lab is made of four virtual machines that seems necessary for the CKC steps :
+This lab is made of six virtual machines that seems necessary for the CKC steps :
+
 - **scanVM** running kali-Linux machine with needed tools like Nmap , dirsearch , ...
+
 - **crackVM** running Ubuntu machine with Hashcat tool installed
+
 - **covenantVM** running ubuntu machine with Covenant C2 tool installed and running on port 7443 .
-- **phishingVM** running ubuntu machine with gophish tool installed and running on port 443 .
+
+- **covenantRedirector** running ubuntu machine with nginx redirector on port 80 .
+
+- **phishingVM** running ubuntu machine with gophish tool installed and running on port 3333 and 80 .
+
+- **gophishRedirector** running ubuntu machine with nginx redirector on port 80 .
 
 The lab setup is automated using vagrant and ansible automation tools.
 
@@ -14,6 +22,7 @@ The lab setup is automated using vagrant and ansible automation tools.
 
 
 ## Requirements
+
 So far the lab has only been tested on a linux machine . Ansible has some problems with Windows hosts so I don't know about that.
 
 For the setup to work properly you need to install:
@@ -33,5 +42,16 @@ cd REDCELL/
 chmod +x redcell.sh
 ./redcell.sh
 ```
+
+## Next steps !!
+
+- Adding terraform to provision this infrastructure on aws EC2 instances.
+
+- Adding [Molecule](https://molecule.readthedocs.io/en/latest/) framework to testing Ansible Roles and increasing the speed of deployment.
+
+- Adding [InSpec](https://community.chef.io/tools/chef-inspec) to test deployed infrastructure against a desired state.
+- Glueing everything together in a CI Pipeline.
+
 ### Thanks to
+
 - [T3nb3w](https://twitter.com/t3nb3w)
