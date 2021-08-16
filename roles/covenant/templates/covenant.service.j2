@@ -1,0 +1,12 @@
+[Unit]
+Description=covenant
+After=network.target
+[Service]
+Type=simple
+WorkingDirectory=/home/vagrant/covenant/Covenant/Covenant
+ExecStart=/bin/dotnet run
+User={{ covenant_user }}
+StandardOutput=file:/var/log/covenant/covenant.log
+StandardError=file:/var/log/covenant/covenant_error.log
+[Install]
+WantedBy=multi-user.target

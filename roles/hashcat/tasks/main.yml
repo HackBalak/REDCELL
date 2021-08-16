@@ -24,16 +24,17 @@
     update: yes
     recursive: yes
 
+
 - name: Build Hashcat
   become: true
   command: make
   args:
     chdir: "{{ hashcat_git_location }}/hashcat"
 
+
 - name: Install Hashcat
   become: true
   command: make install
   args:
     chdir: "{{ hashcat_git_location }}/hashcat"
-
 

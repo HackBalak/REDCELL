@@ -1,0 +1,9 @@
+---
+- name: Reload systemd.
+  systemd:
+    daemon_reload: yes
+
+- name: Reload covenant.
+  service:
+    name: covenant
+    state: restarted

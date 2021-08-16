@@ -1,0 +1,8 @@
+---
+- name: Covenant redirector Setup
+  hosts: covenantRedirector
+  become: yes
+  
+  roles:
+  - common
+  - covenantVM_redirector

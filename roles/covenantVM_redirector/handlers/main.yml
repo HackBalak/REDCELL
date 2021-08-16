@@ -1,0 +1,6 @@
+---
+# handlers file for redirector-nginx
+- name: restart nginx
+  service:
+    name: nginx
+    state: restarted

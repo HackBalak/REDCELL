@@ -31,6 +31,15 @@ Vagrant.configure("2") do |config|
     end
   end
 
+  config.vm.define "covenantRedirector" do |ccr|
+    config.vm.box = "ubuntu/focal64"
+    ccr.vm.network "private_network", ip: "192.168.50.33"
+    ccr.vm.provision "ansible", playbook: "covenantRedirector.yml"
+    ccr.vm.hostname = "covenantRedirector"
+    ccr.vm.provider "virtualbox" do |vbr|
+    vbr.memory = "512"
+    end  
+  end
 
   config.vm.define "phishingVM" do |cd|
     config.vm.box = "ubuntu/focal64"
@@ -42,4 +51,15 @@ Vagrant.configure("2") do |config|
     end
   end
 
+
+  config.vm.define "gophishRedirector" do |cdr|
+    config.vm.box = "ubuntu/focal64"
+    cdr.vm.network "private_network", ip: "192.168.50.44"
+    cdr.vm.provision "ansible", playbook: "gophishRedirector.yml"
+    cdr.vm.hostname = "gophishRedirector"
+    cdr.vm.provider "virtualbox" do |vdr|
+    vdr.memory = "512"
+    end
   end
+
+end

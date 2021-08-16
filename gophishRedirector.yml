@@ -1,0 +1,7 @@
+- name: gophish redirector Setup
+  hosts: gophishRedirector
+  become: yes
+  
+  roles:
+  - common
+  - gophishVM_redirector

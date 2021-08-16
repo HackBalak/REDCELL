@@ -1,0 +1,9 @@
+---
+covenant_user: "{{ ansible_user }}"
+covenant_download_destination: "/tmp/covenant.zip"
+covenant_install_destination: "/home/{{ covenant_user }}/covenant"
+covenant_config_template_source: "config.json.j2"
+covenant_service: covenant.service
+covenant_service_template_source: covenant.service.j2
+covenant_service_template_destination: "/etc/systemd/system/{{ covenant_service }}"
+covenant_service_log_directory: /var/log/covenant

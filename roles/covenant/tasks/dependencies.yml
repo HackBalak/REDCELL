@@ -1,0 +1,11 @@
+---
+- name: Create directories for covenant.
+  file:
+    path: "{{ item.path }}"
+    state: directory
+    mode: "{{ item.mode }}"
+    owner: "{{ item.user }}"
+    group: "{{ item.group }}"
+  with_items:
+    - { path: "{{ covenant_install_destination }}",   user: "{{ covenant_user }}", group: "{{ covenant_user }}", mode: '0755' }
+    - { path: "{{ covenant_service_log_directory }}", user: "{{ covenant_user }}", group: "root",               mode: '0770' }

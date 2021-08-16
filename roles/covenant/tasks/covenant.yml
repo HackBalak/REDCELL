@@ -1,0 +1,51 @@
+---
+
+- name: check if covenant repo exist 
+  shell: ls {{ covenant_install_destination }}
+  register: exist_result
+
+- name: Clone repository if not exist 
+  shell: cd {{ covenant_install_destination }} && git clone --recurse-submodules {{ covenant_url }}
+  when: exist_result.stdout == ""
+
+- name: Ensure files of folders covenant have the right ownership
+  file:
+    path: "{{ covenant_install_destination }}"
+    owner: "{{ covenant_user }}"
+    group: "{{ covenant_user }}"
+    recurse: True
+
+
+
+
+- name: Ensure covenant service file is properly set
+  template:
+    src: "{{ covenant_service_template_source }}"
+    dest: "{{ covenant_service_template_destination }}"
+    owner: "{{ covenant_user }}"
+    group: "{{ covenant_user }}"
+    mode: 0640
+  notify:
+    - Reload covenant.
+    - Reload systemd.
+
+
+- name: Ensure covenant is properly started
+  service:
+    name: "{{ covenant_service }}"
+    state: started
+    enabled: yes
+
+- name: If SELinux, fix issue with rights for covenant
+  shell:
+    cmd: |
+      ausearch -c '(covenant)' --raw | audit2allow -M my-covenant |
+      semodule -i my-covenant.pp
+  when: ansible_selinux.status == 'enabled'
+
+- name: Start covenant after fix
+  service:
+    name: "{{ covenant_service }}"
+    state: started
+    enabled: yes
+  when: ansible_selinux.status == 'enabled'
