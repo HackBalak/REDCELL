@@ -1,6 +1,6 @@
 # REDCELL
 
-Redcell is an Infrastructure as Code Lab of red teamers operations , it's built by Vagrant and Ansible , and it can be run locally .
+Redcell is an Infrastructure as Code Lab of red teamers operations , it's built using Vagrant and Ansible , and it can be run locally .
 
 This lab is made of six virtual machines that seems necessary for the CKC steps :
 
