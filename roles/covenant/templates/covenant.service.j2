@@ -5,7 +5,7 @@ After=network.target
 Type=simple
 WorkingDirectory=/home/vagrant/covenant/Covenant/Covenant
 ExecStart=/bin/dotnet run
-User={{ covenant_user }}
+User=root
 StandardOutput=file:/var/log/covenant/covenant.log
 StandardError=file:/var/log/covenant/covenant_error.log
 [Install]

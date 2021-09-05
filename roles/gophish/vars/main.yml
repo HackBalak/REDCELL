@@ -5,6 +5,7 @@ gophish_binary_capability: cap_net_bind_service+eip
 gophish_dependencies_package:
     - coreutils
     - grep
+    - unzip
 
 _gophish_dependencies_package:
   default:

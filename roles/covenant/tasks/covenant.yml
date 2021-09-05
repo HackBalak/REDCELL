@@ -5,8 +5,9 @@
   register: exist_result
 
 - name: Clone repository if not exist 
-  shell: cd {{ covenant_install_destination }} && git clone --recurse-submodules {{ covenant_url }}
+  shell: cd {{ covenant_install_destination }} && git clone --branch dev --recurse-submodules {{ covenant_url }}
   when: exist_result.stdout == ""
+
 
 - name: Ensure files of folders covenant have the right ownership
   file:
@@ -14,8 +15,6 @@
     owner: "{{ covenant_user }}"
     group: "{{ covenant_user }}"
     recurse: True
-
-
 
 
 - name: Ensure covenant service file is properly set

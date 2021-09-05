@@ -19,7 +19,7 @@
     name: nginx
     state: present
     update_cache: yes
-#  when: nginx_result.stdout != ""
+  # when: nginx_result.stdout != ""
 
 - name: Add NGINX configuration from template
   template:

@@ -1,12 +1,12 @@
 Vagrant.configure("2") do |config|
 
   config.vm.define "scanVM" do |ca|
-    config.vm.box = "kalilinux/rolling"
+    config.vm.box = "elrey741/kali-linux_amd64"
     ca.vm.network "private_network", ip: "192.168.50.10"
     ca.vm.provision "ansible", playbook: "scanVM.yml"
     ca.vm.hostname = "scanVM"
     ca.vm.provider "virtualbox" do |vba|
-    vba.memory = "1024"
+    vba.memory = "512"
     vba.gui = false
     end
   end
@@ -17,7 +17,7 @@ Vagrant.configure("2") do |config|
     cb.vm.provision "ansible", playbook: "crackVM.yml"
     cb.vm.hostname = "crackVM"
     cb.vm.provider "virtualbox" do |vbb|
-    vbb.memory = "1024"
+    vbb.memory = "512"
     end
   end
 
@@ -27,7 +27,7 @@ Vagrant.configure("2") do |config|
     cc.vm.provision "ansible", playbook: "covenantVM.yml"
     cc.vm.hostname = "covenantVM"
     cc.vm.provider "virtualbox" do |vbc|
-    vbc.memory = "1024"
+    vbc.memory = "512"
     end
   end
 
@@ -47,7 +47,7 @@ Vagrant.configure("2") do |config|
     cd.vm.provision "ansible", playbook: "phishingVM.yml"
     cd.vm.hostname = "phishingVM"
     cd.vm.provider "virtualbox" do |vb|
-    vb.memory = "1024"
+    vb.memory = "512"
     end
   end
 
