@@ -4,6 +4,7 @@ Redcell is an Infrastructure as Code Lab of red teamers operations , it's built 
 
 This lab is made of six virtual machines that seems necessary for the CKC steps :
 
+
 - **scanVM** running kali-Linux machine with needed tools like Nmap , dirsearch , ...
 
 - **crackVM** running Ubuntu machine with cracking tools installed
@@ -17,7 +18,6 @@ This lab is made of six virtual machines that seems necessary for the CKC steps 
 - **gophishRedirector** running ubuntu machine with nginx redirector on port 80 .
 
 The lab setup is automated using vagrant and ansible automation tools.
-
 
 
 
@@ -42,6 +42,13 @@ cd REDCELL/
 chmod +x redcell.sh
 ./redcell.sh
 ```
+## The Project working Idea
+
+<img alt="GIF" src="REDCELL.png?raw=true" >
+
+## PoC
+
+<iframe src="https://drive.google.com/file/d/1vdofrk5AzTA7H1zmlVTQsNbgpiQXWm8Z/preview" width="640" height="480" allow="autoplay"></iframe>
 
 ## Next steps !!
 
