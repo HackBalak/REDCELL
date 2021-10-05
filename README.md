@@ -6,7 +6,7 @@ This lab is made of six virtual machines that seems necessary for the CKC steps 
 
 - **scanVM** running kali-Linux machine with needed tools like Nmap , dirsearch , ...
 
-- **crackVM** running Ubuntu machine with Hashcat tool installed
+- **crackVM** running Ubuntu machine with cracking tools installed
 
 - **covenantVM** running ubuntu machine with Covenant C2 tool installed and running on port 7443 .
 
