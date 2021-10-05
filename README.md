@@ -46,9 +46,6 @@ chmod +x redcell.sh
 
 <img alt="GIF" src="REDCELL.png?raw=true" >
 
-## PoC
-
-<iframe src="https://drive.google.com/file/d/1vdofrk5AzTA7H1zmlVTQsNbgpiQXWm8Z/preview" width="640" height="480" allow="autoplay"></iframe>
 
 ## Next steps !!
 
