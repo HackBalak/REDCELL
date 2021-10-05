@@ -52,6 +52,3 @@ chmod +x redcell.sh
 - Adding [InSpec](https://community.chef.io/tools/chef-inspec) to test deployed infrastructure against a desired state.
 - Glueing everything together in a CI Pipeline.
 
-### Thanks to
-
-- [T3nb3w](https://twitter.com/t3nb3w)
